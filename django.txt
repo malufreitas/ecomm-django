@@ -1,0 +1,77 @@
+$ pip install django
+
+$ django-admin startproject nomeprojeto .
+
+. é para instalar na pasta que vc ta acessando no terminar
+
+arquivo
+settings.py
+ALLOWED_HOSTS = ['*']
+
+$ python manage.py startapp nomeapp
+
+
+
+- Cria a classe no models.py:
+
+from django.db import models
+
+class Product(models.Model):
+   name = models.CharField('Nome', max_length=100)
+   description = models.TextField('Descrição')
+   price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+
+
+- Para criar a migration:
+No arquivo settings.py
+
+INSTALLED_APPS = [
+....,
+....,
+'products  # Nome do arquivo
+]
+
+Isso cria um arquivo na pasta migrations, com os campos do objeto.
+
+
+- Para descobrir os comandos para rodar o código
+$ python manage.py
+
+
+
+- Arquivo models.py:
+
+from django.db import models
+
+class Product(models.Model):
+   name = models.CharField('Nome', max_length=100)
+   description = models.TextField('Descrição')
+   price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+
+   # Função pro print da classe
+   def __str__(self):
+      return self.name
+
+
+
+- Arquivo tests.py
+
+from django.test import TestCase
+
+from .models import Product
+
+class ProductStrTextCase(TestCase):
+   def text_str_should_return_name(self):
+      product = Product.objects.create(
+         name = 'Teste Produto',
+         description = 'Teste description,
+         price = 10.5
+      )
+
+      self.asserEqual(str(product), 'Teste Produto')
+
+
+
+
+- Para aplicar as migrations:
+$ python manage.py migrate
