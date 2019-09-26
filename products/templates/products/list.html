@@ -1,0 +1,7 @@
+<!-- Para rodar a view: $ python manage.py runserver -->
+<h1>Lista de Produtos</h1>
+
+<!-- Linguagem jinja usada pro django -->
+{% for product in products %}
+    <p><b>{{ product }}</b> - {{ product.price }}</p>
+{% endfor %} 
