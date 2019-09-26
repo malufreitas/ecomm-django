@@ -12,7 +12,8 @@ def list_products(request):
 
     # O contexto é sempre um dicionario
     context = {
-        'products': products
+        'products': products,
+        'products_empty': []
     }
 
     # Retorna um render(request, nomeDoTemplate, contexto)

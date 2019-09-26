@@ -1,7 +1,58 @@
 <!-- Para rodar a view: $ python manage.py runserver -->
-<h1>Lista de Produtos</h1>
 
-<!-- Linguagem jinja usada pro django -->
-{% for product in products %}
-    <p><b>{{ product }}</b> - {{ product.price }}</p>
-{% endfor %} 
+<!-- Chama o arquivo 'base.html' para pegar a navbar-->
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <!-- Apenas alinhando o titulo -->
+        <div class="col-md-g">
+            <h1>Lista de Produtos</h1>
+        </div>
+
+        <div class="col-md-3">
+            <!-- Inicio - Botão para adicionar um produto -->
+            <a class="btn btn-primary btn-block" href="">
+                <i class="fa fa-plus-circle"></i>
+                Adicionar Produto
+            </a>  
+            <!-- Fim - Botão para adicionar um produto -->
+        </div>
+
+        <table class="table table-striped table-bordered">
+            <!-- Inicio - Cabeçalho da tabela -->
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <!-- Fim - Cabeçalho da tabela -->
+
+            <!-- Inicio - Corpo da tabela -->
+            <tbody>
+                <!-- Linguagem jinja usada pro django -->
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>R$ {{ product.price }}</td>
+                        <td>{{ product.description }}</td>
+                    </tr>
+                {% empty %}
+                <tr>
+                    <!-- colspan é para ocupara as 3 colunas -->
+                    <td colspan=3 class="text-center">
+                        Não há produtos para serem listados
+                    </td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+            <!-- Fim - Corpo da tabela -->
+
+        </table>
+
+    </div>
+
+{% endblock %}
